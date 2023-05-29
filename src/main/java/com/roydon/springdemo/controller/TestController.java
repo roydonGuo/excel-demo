@@ -2,20 +2,19 @@ package com.roydon.springdemo.controller;
 
 import com.roydon.springdemo.domain.ExcelData;
 import com.roydon.springdemo.domain.Part;
-import com.roydon.springdemo.util.MyExcelUtils;
+import com.roydon.springdemo.util.ExcelUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
 public class TestController {
-
 
     /**
      * excel导出
@@ -37,9 +36,10 @@ public class TestController {
 
         List<ExcelData> collect = Stream.of(excelData1, excelData2).collect(Collectors.toList());
 
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String time = dateFormat.format(new Date());
 
-        MyExcelUtils.exportExcel(collect, "表格信息", "详细信息", ExcelData.class, "信息文件" + time + ".xls", response);
+        ExcelUtils.exportExcel(collect, "表格信息", "详细信息", ExcelData.class, "信息文件" + time + ".xls", response);
 
     }
 

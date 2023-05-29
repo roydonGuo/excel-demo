@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MyExcelUtils {
+public class ExcelUtils {
 
 
     /**
